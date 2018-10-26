@@ -23,3 +23,4 @@ Ainda se encontra em desenvolvimento, mas com tempo sera finalizado com tudo que
 - [ ] Aceitar novos membros nos grupos gerenciados.
 - [ ] Recusar novos membros nos grupos gerenciados.
 - [ ] Verificar o tempo de existência da conta dos novos membros.
+- [ ] Participar automaticamente do grupo da lista se não estiver.
