@@ -1,4 +1,4 @@
-# :snake: Selenium-Facebook-v2
+# :snake: SeleniumFbAutomation
 
 Script para automatizar algumas tarefas diárias que deveria realizar manualmente no Facebook, que não faço por falta de vontade.
 
