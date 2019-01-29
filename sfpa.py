@@ -76,40 +76,45 @@ class SeleniumFbAutomation:
 	def post_group(self, grupo, postagem, imagem):
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/")
 		nome_grupo = self.browser.title
-		self.browser.find_element_by_xpath("//textarea[@name='xc_message']").send_keys(postagem)
-
-		if os.path.exists(imagem):
-			self.browser.find_element_by_xpath("//input[@value='Foto' or name='view_photo']").click()
-			self.browser.find_element_by_xpath("//input[@name='file1']").send_keys(imagem)
-			self.browser.find_element_by_xpath("//input[@value='Prévia' or name='add_photo_done']").click()
-		else:
-			print(self.tipo_mensagem("erro", u"Não foi possivel encontrar essa imagem."))
-			self.browser.close()
-			self.finalizar()
 
 		try:
-			self.browser.find_element_by_xpath("//input[@value='Publicar' or name='view_post']").click()
-			print(self.tipo_mensagem("sucesso", u"Postado no grupo "+nome_grupo+"."))
+			self.browser.find_element_by_xpath(u"//input[@value='Participar do grupo']").click()
+			print(self.tipo_mensagem("alerta", u"Solicitação de participar no grupo "+nome_grupo+" foi enviada."))
 		except NoSuchElementException:
-			print(self.tipo_mensagem("erro", u"Não foi possivel postar no grupo "+nome_grupo+"."))
-			self.browser.close()
-			self.finalizar()
+			try:
+				self.browser.find_element_by_xpath(u"//input[@value='Cancelar solicitação de participação']")
+				print(self.tipo_mensagem("alerta", u"Solicitação de participar no grupo "+nome_grupo+u" está em análise."))
+			except NoSuchElementException:
+				try:
+					self.browser.find_element_by_xpath("//textarea[@name='xc_message']").send_keys(postagem)
+					time.sleep(20)
 
-	def invite_group(self, grupo):
-		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/")
-		nome_grupo = self.browser.title
-		try:
-			if self.browser.find_element_by_xpath("//input[@value='Cancelar solicitação de participação']").get_attribute("value") == "Cancelar solicitação de participação":
-				print(self.tipo_mensagem("alerta", u"Solicitação de participar no grupo "+nome_grupo+" está em andamento."))
-			else self.browser.find_element_by_xpath("//input[@value='Participar do grupo']").get_attribute("value") == "Participar do grupo":
-				self.browser.find_element_by_xpath("//input[@value='Participar do grupo']").click()
-				print(self.tipo_mensagem("alerta", u"Solicitação de participar no grupo "+nome_grupo+" foi enviada."))
-		except NoSuchElementException:
-			pass
+					if os.path.exists(imagem):
+						self.browser.find_element_by_xpath("//input[@value='Foto' or name='view_photo']").click()
+						self.browser.find_element_by_xpath("//input[@name='file1']").send_keys(imagem)
+						time.sleep(12)
+						self.browser.find_element_by_xpath("//input[@value='Prévia' or name='add_photo_done']").click()
+					else:
+						print(self.tipo_mensagem("erro", u"Não foi possivel encontrar essa imagem."))
+						self.browser.close()
+						self.finalizar()
+
+					try:
+						time.sleep(10)
+						self.browser.find_element_by_xpath("//input[@value='Publicar' or name='view_post']").click()
+						print(self.tipo_mensagem("sucesso", u"Postado no grupo "+nome_grupo+"."))
+						self.progress_bar(0.90)
+					except NoSuchElementException:
+						print(self.tipo_mensagem("erro", u"Não foi possivel postar no grupo "+nome_grupo+"."))
+						self.browser.close()
+						self.finalizar()
+				except NoSuchElementException:
+					pass
 
 	def requests_group(self, grupo):
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/requests/")
 		nome_grupo = self.browser.title
+		
 		try:
 			self.browser.find_element_by_xpath("//input[@value='Aprovar tudo' or name='approve_all']").click()
 			self.browser.find_element_by_xpath("//input[@value='Confirmar']").click()

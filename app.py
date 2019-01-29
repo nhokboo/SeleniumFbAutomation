@@ -28,7 +28,6 @@ sfpa.post_page(pagina , postagem, lista_imagens)
 sfpa.progress_bar(0.90)
 
 for id_group in sfpa.remove_repetidos(lista_grupos):
-	sfpa.invite_group(id_group)
 	sfpa.post_group(id_group, postagem, lista_imagens)
 	sfpa.requests_group(id_group)
 	sfpa.progress_bar(0.90)
