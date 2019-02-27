@@ -9,6 +9,7 @@ Ainda se encontra em desenvolvimento, mas com tempo sera finalizado com tudo que
 ### Andamento do Projeto 
 
 - [x] Autenticação de Login
+  - [x] Login em duas contas diferentes.
 - [x] Postagem automatica no Perfil.
 - [x] Postagem automatica na Página.
 - [x] Postagem automatica em Grupos.
