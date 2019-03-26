@@ -112,12 +112,11 @@ class SeleniumFbAutomation:
 					pass
 
 	def requests_group(self, grupo):
-		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/requests/")
+		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/madminpanel/requests/")
 		nome_grupo = self.browser.title
 		
 		try:
 			self.browser.find_element_by_xpath("//input[@value='Aprovar tudo' or name='approve_all']").click()
-			self.browser.find_element_by_xpath("//input[@value='Confirmar']").click()
 			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo "+nome_grupo+"."))
 		except NoSuchElementException:
 			print(self.tipo_mensagem("erro", u"Não foi possivel postar no grupo "+nome_grupo+"."))
