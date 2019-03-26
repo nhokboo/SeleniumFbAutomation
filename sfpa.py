@@ -4,16 +4,18 @@ from pyfiglet import Figlet
 from clint.textui import colored
 from datetime import datetime
 from selenium import webdriver
+from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
-import os, platform, time, progressbar
+import os, sys, platform, time, progressbar
 
 class SeleniumFbAutomation:
 	def __init__(self):
 		firefox_options = Options()
 		firefox_options.set_headless()
 		self.browser = Firefox(options=firefox_options)
+		self.browser = webdriver.Firefox()
 		self.browser.get("https://mbasic.facebook.com/login")
 
 	def autenticar(self, email, senha):
@@ -32,10 +34,12 @@ class SeleniumFbAutomation:
 		self.browser.get("https://mbasic.facebook.com/profile.php")
 		usuario = self.browser.title
 		self.browser.find_element_by_xpath("//textarea[@name='xc_message']").send_keys(postagem)
+		time.sleep(20)
 
 		if os.path.exists(imagem):
 			self.browser.find_element_by_xpath("//input[@value='Foto' or name='view_photo']").click()
 			self.browser.find_element_by_xpath("//input[@name='file1']").send_keys(imagem)
+			time.sleep(8)
 			self.browser.find_element_by_xpath("//input[@value='Prévia' or name='add_photo_done']").click()
 		else:
 			print(self.tipo_mensagem("erro", u"Não foi possivel encontrar essa imagem."))
@@ -43,6 +47,7 @@ class SeleniumFbAutomation:
 			self.finalizar()
 
 		try:
+			time.sleep(8)
 			self.browser.find_element_by_xpath("//input[@value='Publicar' or name='view_post']").click()
 			print(self.tipo_mensagem("sucesso", u"Postado no perfil de "+usuario+"."))
 		except NoSuchElementException:
@@ -54,11 +59,13 @@ class SeleniumFbAutomation:
 		self.browser.get("https://mbasic.facebook.com/"+pagina+"/")
 		nome_pagina = self.browser.title
 		self.browser.find_element_by_xpath("//textarea[@name='xc_message']").send_keys(postagem)
+		time.sleep(20)
 
 		if os.path.exists(imagem):
 			self.browser.find_element_by_xpath("//input[@value='Mais']").click()
 			self.browser.find_element_by_xpath("//input[@value='Foto' or name='view_photo']").click()
 			self.browser.find_element_by_xpath("//input[@name='file1']").send_keys(imagem)
+			time.sleep(8)
 			self.browser.find_element_by_xpath("//input[@value='Prévia' or name='add_photo_done']").click()
 		else:
 			print(self.tipo_mensagem("erro", u"Não foi possivel encontrar essa imagem."))
@@ -66,6 +73,7 @@ class SeleniumFbAutomation:
 			self.finalizar()
 
 		try:
+			time.sleep(8)
 			self.browser.find_element_by_xpath("//input[@value='Publicar' or name='view_post']").click()
 			print(self.tipo_mensagem("sucesso", u"Postado no página de "+nome_pagina+"."))
 		except NoSuchElementException:
@@ -111,17 +119,18 @@ class SeleniumFbAutomation:
 				except NoSuchElementException:
 					pass
 
+
 	def requests_group(self, grupo):
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/madminpanel/requests/")
-		nome_grupo = self.browser.title
 		
 		try:
+			time.sleep(10)
 			self.browser.find_element_by_xpath("//input[@value='Aprovar tudo' or name='approve_all']").click()
-			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo "+nome_grupo+"."))
+			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo."))
+			time.sleep(10)
 		except NoSuchElementException:
-			print(self.tipo_mensagem("erro", u"Não foi possivel postar no grupo "+nome_grupo+"."))
-			self.browser.close()
-			self.finalizar()
+			pass
+
 
 	def post_birthday(self, postagem, imagem):
 		self.browser.get("https://mbasic.facebook.com/events/calendar/birthdays/")
@@ -154,9 +163,9 @@ class SeleniumFbAutomation:
 
 	def qual_turno(self):
 	    hora = datetime.now().strftime("%H")
-	    if hora >= "06" and hora <= "12":
+	    if hora >= "06" and hora <= "11":
 	    	return True
-	    elif hora >= "12" and hora <= "18":
+	    elif hora >= "11" and hora <= "18":
 	    	return False
 	    else:
 	    	return False
