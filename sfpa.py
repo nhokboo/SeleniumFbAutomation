@@ -119,14 +119,14 @@ class SeleniumFbAutomation:
 				except NoSuchElementException:
 					pass
 
-	def requests_group(self, grupo):	
+	def requests_group(self, grupo):
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/madminpanel/requests/")	
 
- 		try:	
-			time.sleep(10)	
-			self.browser.find_element_by_xpath("//input[@value='Aprovar tudo' or name='approve_all']").click()	
-			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo."))	
-			time.sleep(10)	
+		try:
+			time.sleep(10)
+			self.browser.find_element_by_xpath("//input[@value='Aprovar tudo' or name='approve_all']").click()
+			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo."))
+			time.sleep(10)
 		except NoSuchElementException:	
 			pass
 
