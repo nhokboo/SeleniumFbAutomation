@@ -25,5 +25,6 @@ sfpa.post_page(pagina, postagem, random.choice(lista_imagens))
 sfpa.progress_bar(3.60)
 
 for id_group in lista_grupos:
+	sfpa.requests_group(id_group)
 	sfpa.post_group(id_group, postagem, random.choice(lista_imagens))
 sfpa.finalizar()
