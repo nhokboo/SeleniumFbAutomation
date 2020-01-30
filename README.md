@@ -23,3 +23,11 @@ Ainda se encontra em desenvolvimento, mas com tempo sera finalizado com tudo que
 - [ ] Todas as mensagem no arquivo 'language.ini'
 - [ ] Parabenizar contatos do Facebook.
   - [ ] Distinguir sexo do contato para parabenizar com mensagem correspondente ao seu sexo.
+
+## Informações
+
+Se você gostou do meu trabalho,
+
+Faça uma contribuição única! [Me Compre um café!](hhttps://www.buymeacoffee.com/nicopastorello)
+
+Obrigado pela visita!
