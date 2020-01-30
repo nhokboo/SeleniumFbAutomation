@@ -26,7 +26,7 @@ Ainda se encontra em desenvolvimento, mas com tempo sera finalizado com tudo que
 
 ## Informações
 
-Se você gostou do meu trabalho,
+Se você gostou do meu trabalho.
 
 Faça uma contribuição única! [Me Compre um café!](hhttps://www.buymeacoffee.com/nicopastorello)
 
