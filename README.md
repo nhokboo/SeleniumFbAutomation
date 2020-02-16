@@ -28,6 +28,6 @@ Ainda se encontra em desenvolvimento, mas com tempo sera finalizado com tudo que
 
 Se você gostou do meu trabalho.
 
-Faça uma contribuição única! [Me Compre um café!](hhttps://www.buymeacoffee.com/nicopastorello)
+Faça uma contribuição única! [Me Compre um café!](https://www.buymeacoffee.com/nicopastorello)
 
 Obrigado pela visita!
