@@ -5,12 +5,8 @@ import random
 
 sfpa = SeleniumFbAutomation()
 
-if sfpa.qual_turno():
-	email 	= ''
-	senha 	= ''
-else:
-	email 	= ''
-	senha 	= ''
+email 	= ''
+senha 	= ''
 
 postagem 	  = '👉 Pastorello - Assistência Técnica 👈\n🏅 Assistência Técnica Especializada\n📱 Fone: (54) 99701-9164.\n\n🚗 End: R. Marcos Nardon n° 69 - Fenavinho, Bento Gonçalves.\n\n⌚ Horário de atendimento\nSegunda à Sexta:\n7:30h às 18:00h\nSábados:\n07:30h às 15:00h\n\n#técnico #assistência #técnica #assistênciatécnica #tecnologia #inovação #pastorello #agilidade #profissionalismo #assistencia #manutencao #computadores #notebooks #gamers #nvidia #geforce #intel #amd #ryzen #suporte #bentogoncalves #solucoes #tecnico #microsoldering #microsoldagem #microsolda #solda #conserto #repair #fix #reparacion'
 pagina 		  = 'PastorelloAssistenciaTecnica'
