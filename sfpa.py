@@ -125,7 +125,7 @@ class SeleniumFbAutomation:
 				except NoSuchElementException:
 					pass
 
-	def requests_group(self, grupo, nome_grupo):
+	def requests_group(self, grupo):
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/")
 		nome_grupo = self.browser.title
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/madminpanel/requests/")
@@ -141,13 +141,21 @@ class SeleniumFbAutomation:
 			print(self.tipo_mensagem("alerta", u"Nenhuma solicitações de entrada no grupo "+nome_grupo+"."))
 			pass
 
-	def post_birthday(self, postagem, imagem):
+	def post_birthday(self, postagem):
 		self.browser.get("https://mbasic.facebook.com/events/calendar/birthdays/")
 
 		try:
 			time.sleep(randint(15, 30))
+			campos = self.browser.find_element_by_xpath("//textarea[@name='message']")
+			for i in campos: 
+				element_id = str(el.get_attribute('id')) 
+				post_field = self.browser.find_element_by_xpath('//*[@id ="' + element_id + '"]') 
+				post_field.send_keys(postagem) 
+				post_field = self.browser.find_element_by_xpath("//input[@value='Publicar']").click()
+			time.sleep(randint(5, 10))
+
 		except NoSuchElementException:	
-			print(self.tipo_mensagem("erro", u"Não foi possivel postar parabenização de '+contato+'."))
+			print(self.tipo_mensagem("erro", u"Não foi possivel postar parabenização de "+contato+"."))
 			self.browser.close()
 			self.finalizar()
 
