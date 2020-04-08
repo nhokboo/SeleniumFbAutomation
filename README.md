@@ -17,7 +17,6 @@ Ainda se encontra em desenvolvimento, mas com tempo sera finalizado com tudo que
   - [x] Participar automaticamente do grupo da lista se não estiver.
   - [x] Aceitar novos membros nos grupos.
 - [x] Define imagens aleatorias da lista de imagens para ser postagem automatica.
-- [x] Múltiplas contas de acesso, definida por turno do dia entre o período da manhã e o período da manhã.
 -----------
 - [ ] Configuração completa pelo arquivo 'config.ini'
 - [ ] Todas as mensagem no arquivo 'language.ini'
