@@ -8,7 +8,7 @@ from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
-import os, sys, platform, time, progressbar
+import os, sys, platform, time, progressbar, random
 
 class SeleniumFbAutomation:
 	def __init__(self):
@@ -88,6 +88,8 @@ class SeleniumFbAutomation:
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/")
 		nome_grupo = self.browser.title
 		print(self.tipo_mensagem("alerta", u"Iniciando a postagem no grupo "+nome_grupo+"."))
+		lista_emoji = ['👑','😍', '🥰']
+		emoji = random.choice(lista_emoji)
 
 		try:
 			self.browser.find_element_by_xpath(u"//input[@value='Participar do grupo']").click()
@@ -98,7 +100,7 @@ class SeleniumFbAutomation:
 				print(self.tipo_mensagem("alerta", u"Solicitação de participar no grupo "+nome_grupo+u" está em análise."))
 			except NoSuchElementException:
 				try:
-					self.browser.find_element_by_xpath("//textarea[@name='xc_message']").send_keys(postagem)
+					self.browser.find_element_by_xpath("//textarea[@name='xc_message']").send_keys(emoji+" "+nome_grupo+" "+emoji+"\n\n"+postagem)
 					time.sleep(randint(15, 30))
 
 					if os.path.exists(imagem):
@@ -114,7 +116,7 @@ class SeleniumFbAutomation:
 					try:
 						time.sleep(randint(5, 30))
 						self.browser.find_element_by_xpath("//input[@value='Publicar' or name='view_post']").click()
-						print(self.tipo_mensagem("sucesso", u"Postado no grupo "+nome_grupo+"."))
+						print(self.tipo_mensagem("sucesso", u"Postagem realizada no grupo "+nome_grupo+"."))
 						self.progress_bar(0.90)
 					except NoSuchElementException:
 						print(self.tipo_mensagem("erro", u"Não foi possivel postar no grupo "+nome_grupo+"."))
@@ -123,15 +125,20 @@ class SeleniumFbAutomation:
 				except NoSuchElementException:
 					pass
 
-	def requests_group(self, grupo):
+	def requests_group(self, grupo, nome_grupo):
+		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/")
+		nome_grupo = self.browser.title
 		self.browser.get("https://mbasic.facebook.com/groups/"+grupo+"/madminpanel/requests/")
+	
+		print(self.tipo_mensagem("alerta", u"Verificando solicitações de entrada no grupo "+nome_grupo+"."))
 
 		try:
 			time.sleep(randint(15, 30))
 			self.browser.find_element_by_xpath("//input[@value='Aprovar tudo' or name='approve_all']").click()
-			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo."))
+			print(self.tipo_mensagem("sucesso", u"Aprovado todas as solicitações de entrada no grupo "+nome_grupo+"."))
 			time.sleep(randint(15, 30))
 		except NoSuchElementException:	
+			print(self.tipo_mensagem("alerta", u"Nenhuma solicitações de entrada no grupo "+nome_grupo+"."))
 			pass
 
 	def post_birthday(self, postagem, imagem):
@@ -153,7 +160,7 @@ class SeleniumFbAutomation:
 			return colored.red("[-] Erro: "+mensagem)
 
 	def progress_bar(self, tempo):
-		widgets = ['Proxima postagem ', progressbar.Bar(),' (', progressbar.ETA(), ') ']
+		widgets = ['Proxima postagem em ', progressbar.Bar(),' (', progressbar.ETA(), ') ']
 		for i in progressbar.progressbar(range(100), widgets=widgets):
 		    time.sleep(tempo)
 
